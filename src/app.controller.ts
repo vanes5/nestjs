@@ -12,4 +12,28 @@ export class AppController {
       message: this.appService.getHello()
     };
   }
+
+  @Get('quotes')
+  @Render('quotes')
+  getQuotes(){
+    return {
+      text: "helloka"
+    }
+  }
+
+  @Get('random')
+  @Render('randomQuote')
+  getRandom(){
+    return {
+      text: "nyami"
+    }
+  }
+
+  @Get('top')
+  @Render('topAuthors')
+  getTop(){
+    return {
+      
+    }
+  }
 }
