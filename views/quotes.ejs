@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <p><%= text %></p>
+    <ul>
+        <% q.quotes.forEach(element => {%>
+            <li><q><%=element.quote%></q></li>
+        <%}); %>
+    </ul>
 </body>
 </html>

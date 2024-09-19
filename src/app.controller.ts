@@ -1,5 +1,6 @@
 import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
+import { quotes } from './quotes';
 
 @Controller()
 export class AppController {
@@ -17,7 +18,7 @@ export class AppController {
   @Render('quotes')
   getQuotes(){
     return {
-      text: "helloka"
+      q: quotes 
     }
   }
 
@@ -25,15 +26,24 @@ export class AppController {
   @Render('randomQuote')
   getRandom(){
     return {
-      text: "nyami"
+      q: quotes.quotes[Math.floor(Math.random() * quotes.quotes.length)]
     }
   }
 
   @Get('top')
   @Render('topAuthors')
   getTop(){
+    let data = new Map();
+    quotes.quotes.forEach(element => {
+      if(data.has(element)){
+        data[element.author]++;
+      }
+      else{
+        data.set(element.author,1)
+      }
+    });
     return {
-      
+      data
     }
   }
 }
