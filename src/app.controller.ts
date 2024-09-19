@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotes } from './quotes';
 
@@ -47,4 +47,21 @@ export class AppController {
       SortedData
     }
   }
+
+  @Get('quotes/:id')
+  @Render('quoteId')
+  oneQuote(@Param('id') id: string) {
+    if(quotes.quotes.some(item => item['id'] === parseInt(id))){
+      return{
+        text: `${quotes.quotes[parseInt(id)].author}: ${quotes.quotes[parseInt(id)].quote}`
+      }
+    }
+    else {
+      return{
+        text: `Nincs ilyen id-val rendelkező idézet.:)`
+      }
+    }
+  }
+
+  
 }
