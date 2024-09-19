@@ -7,8 +7,8 @@
 </head>
 <body>
     <ul>
-        <% data.forEach(element => { %>
-            <li><%= element. %><%= element.keys %></li>
+        <% SortedData.forEach((value, key) => { %>
+            <li><%= key %>: <%= value %></li>
         <% }) %>
     </ul>
     

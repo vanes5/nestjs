@@ -35,15 +35,16 @@ export class AppController {
   getTop(){
     let data = new Map();
     quotes.quotes.forEach(element => {
-      if(data.has(element)){
-        data[element.author]++;
+      if(data.has(element.author)){
+        data.set(element.author, data.get(element.author)+1);
       }
       else{
         data.set(element.author,1)
       }
     });
+    let SortedData = new Map([...data.entries()].sort((a, b) => b[1] - a[1]));
     return {
-      data
+      SortedData
     }
   }
 }
