@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Controller, Get, Param, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotes } from './quotes';
 
@@ -61,6 +61,51 @@ export class AppController {
         text: `Nincs ilyen id-val rendelkező idézet.:)`
       }
     }
+  }
+
+  @Get('search')
+  @Render('search')
+  getQuoteByText(@Query('text') text: string){
+      quotes.quotes.forEach(element=>{
+        if(element.quote == text){
+
+        }
+      })
+
+  }
+
+  @Get('authorRandomForm')
+  @Render('randomAuthor')
+  getRandomAuthor(){
+    return {
+      message: this.appService.getHello()
+    };
+  }
+
+  @Get('authorRandom')
+  @Render('randomAuthorKiiras')
+  getRand(@Query('Author') Author: string){
+    let qs = [];
+
+    quotes.quotes.forEach(element=>{
+      if(element.author == Author){
+        qs.push(element.quote);
+      }
+    })
+
+    if(qs.length>0){
+      let random = Math.floor(Math.random() * qs.length)
+      let qu = '';
+      return{
+        qu: qs[random]
+      }
+    }
+    else{
+      return{
+        qu: 'Nincs ilyen szerző'
+      }
+    }
+    
   }
 
   
