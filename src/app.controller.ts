@@ -67,8 +67,10 @@ export class AppController {
   @Render('search')
   getQuoteByText(@Query('text') text: string){
       quotes.quotes.forEach(element=>{
-        if(element.quote == text){
-
+        if(element.quote.includes(text)){
+          return{
+            qu: element.quote
+          }
         }
       })
 
